@@ -6,7 +6,7 @@ import numpy as np
 host = "127.0.0.1"
 port = 3306
 user='root'
-pwd=''
+pwd='root'
 charset='utf8'
 database='transaction'
 

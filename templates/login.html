@@ -1,51 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    <style>
-        .account{
-            width: 400px;
-            border: 1px solid #dddddd;
-            height: 350px;
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/login.css') }}">
 
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: auto;
-            padding: 20px 40px;
-        }
-        .account h1{
-            text-align: center;
-        }
-
-
-
-    </style>
 </head>
 <body>
-<div class="account">
-    <h1>Login</h1>
-    {% with messages = get_flashed_messages() %}
-    <div style = "color: red">{{ messages[0] }}</div>
-    {% endwith %}
-    <form action="{{ url_for('login') }}" method="POST">
-        <div class="form-group">
-            <label for="exampleInputEmail1">Name</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Name" name = "Name">
+<div class="outer_box">
+    <img style="height: 235px; width:600px; visibility:hidden" src="/pictures/backimg.jpg"/>
+    <div class="inner_box">
+        <form action="{{ url_for('login') }}" method="POST">
+        <div class="left_label"></div>
+        <div class="center_form">
+            <p class="title"><span>L&nbsp;O&nbsp;G&nbsp;I&nbsp;N&nbsp;&nbsp;&nbsp;&nbsp;F&nbsp;O&nbsp;R&nbsp;M</span>
+            </p>
+            <p><input type="text" class="form-control" placeholder="Name" name = "Name" ></p>
+            <p><input type="password" class="form-control" placeholder="Password" name = "Password"></p>
+            {% with messages = get_flashed_messages() %}
+            <div style="color: red">{{ messages[0] }}</div>
+            {% endwith %}
         </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name = "Password">
-        </div>
-
-        <button type="submit" class="btn btn-default">Submit</button>
-    </form>
-    
-    <a href="/register" >Click here to register</a>
+        <div class="right_label"></div>
+            <button type="submit" class="signIn_btn"><span>SIGN IN</span></button>
+        </form>
+        <a href="/register" >Click here to register</a>
+    </div>
 </div>
 </body>
 </html>
