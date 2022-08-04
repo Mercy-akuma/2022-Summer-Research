@@ -7,15 +7,49 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
           integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <style>
+        .outer_box {
+        position: relative;
+
+        border: 1px solid #dddddd;
+        width: 100%;
+        height: 100vh;
+        background-image: url('https://images.pexels.com/photos/76969/cold-front-warm-front-hurricane-felix-76969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+
+        background-size: 100% 100%;
+        }
+
+
         .account{
             width: 500px;
-            border: 1px solid #dddddd;
+            //border: 1px solid #dddddd;
             height: 600px;
+            background-color: rgba(134, 221, 221, 0.219);
+            box-shadow: 0px 0px 3px rgb(76, 219, 219);
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
 
 
             margin-left: auto;
             margin-right: auto;
             margin-top: auto;
+
+        }
+
+
+
+
+        .center_form {
+
+        width: 500px;
+        text-align: center;
+        border: 1px solid #dddddd;
+        height: 70px !important;
+        line-height: 50px;
+        background-color: rgba(182, 202, 182, 0.575);
+        margin-bottom: 40px;
+        font-size:18px;
 
         }
         .account h1{
@@ -33,59 +67,66 @@
 
 
 
+
+
     </style>
 </head>
 <body>
-<div class="account">
-    <h1>Upload dataset</h1>
-    <form class="form-inline" method="post" action="/upload" enctype="multipart/form-data">
-        <div class="inner">
-            <div class="form-group">
-                <label>Dataset name</label>
-                <input type="text" class="form-control" placeholder="Name" name="name">
-            </div>
-        </div>
-        <div class="inner">
-            <div class="form-group">
-                <label>Field</label>
-                <input type="text" class="form-control" placeholder="field" name="field">
-            </div>
-        </div>
-        <div class="inner">
-            <div class="form-group">
-                <label>Base price</label>
-                <input type="text" class="form-control" placeholder="base price" name="base price">
-            </div>
-        </div>
-        <div class="inner">
-            <div class="form-group">
-                <label>Keyword</label>
-                <input type="text" class="form-control" placeholder="keyword" name="keyword">
-                <p class="help-block">(please use semicolumn to split keywords)</p>
-            </div>
-        </div>
-        <div class="inner">
-            <div class="form-group">
-                <label for="filename">File input</label>
-                <input type="file" name="filename">
+<div class="outer_box">
+    <div class="account">
 
-            </div>
-        </div>
-        <div class="inner">
-            <button type="submit" class="btn btn-primary" value="submit" name="submit">Submit</button>
-        </div>
-        <div class="inner">
-            {% with messages = get_flashed_messages() %}
-            <div style = "color: red">{{ messages[0] }}</div>
-            {% endwith %}
+        <div class="center_form">
+            U&nbsp;P&nbsp;L&nbsp;O&nbsp;A&nbsp;D&nbsp;&nbsp;&nbsp;D&nbsp;A&nbsp;T&nbsp;A&nbsp;S&nbsp;E&nbsp;T
         </div>
 
+        <form class="form-inline" method="post" action="/upload" enctype="multipart/form-data">
+            <div class="inner">
+                <div class="form-group">
+                    <label>Dataset name</label>
+                    <input type="text" class="form-control" placeholder="Name" name="name">
+                </div>
+            </div>
+            <div class="inner">
+                <div class="form-group">
+                    <label>Field</label>
+                    <input type="text" class="form-control" placeholder="field" name="field">
+                </div>
+            </div>
+            <div class="inner">
+                <div class="form-group">
+                    <label>Base price</label>
+                    <input type="text" class="form-control" placeholder="base price" name="base price">
+                </div>
+            </div>
+            <div class="inner">
+                <div class="form-group">
+                    <label>Keyword</label>
+                    <input type="text" class="form-control" placeholder="keyword" name="keyword">
+                    <p class="help-block" style="font-color:black;">(please use semicolumn to split keywords)</p>
+                </div>
+            </div>
+            <div class="inner">
+                <div class="form-group">
+                    <label for="filename">File input</label>
+                    <input type="file" name="filename">
 
-    </form>
-    <div class="inner">
-        <a href="/" >Return</a>
+                </div>
+            </div>
+            <div class="inner">
+                <button type="submit" class="btn btn-primary" value="submit" name="submit">Submit</button>
+            </div>
+            <div class="inner">
+                {% with messages = get_flashed_messages() %}
+                <div style="color: white">{{ messages[0] }}</div>
+                {% endwith %}
+            </div>
+
+
+        </form>
+        <div class="inner">
+            <a href="/" style="color:white">Go back to homepage</a>
+        </div>
     </div>
 </div>
-
 </body>
 </html>

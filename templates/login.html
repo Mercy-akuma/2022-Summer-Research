@@ -1,33 +1,100 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/login.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <style>
+        .outer_box {
+        position: relative;
 
+        border: 1px solid #dddddd;
+        width: 100%;
+        height: 100vh;
+        background-image: url('https://images.pexels.com/photos/33201/aurora-borealis-lofoten-norway-night.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+
+        background-size: 100% 100%;
+        }
+
+
+
+        .center_form {
+        width: 410px;
+        height: 350px;
+        background-color: rgba(134, 221, 221, 0.219);
+        box-shadow: 0px 0px 3px rgb(76, 219, 219);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+
+        }
+        .center_form p {
+        height: 60px;
+        width: 410px;
+        text-align: center;
+
+}
+        .title {
+        height: 50px !important;
+        line-height: 50px;
+        background-color: rgba(82, 202, 182, 0.575);
+        margin-bottom: 40px;
+
+
+}
+
+        .box_two{
+        height:250px
+        width:410px
+        padding:20px 40px;
+        \\border: 1px solid #dddddd;
+
+        margin-left: 30px;
+        margin-right: 30px;
+        margin-top: auto;
+
+}
+
+
+
+
+
+
+
+    </style>
 </head>
 <body>
 <div class="outer_box">
-    <img style="height: 235px; width:600px; visibility:hidden" src="/pictures/backimg.jpg"/>
-    <div class="inner_box">
-        <form action="{{ url_for('login') }}" method="POST">
-        <div class="left_label"></div>
-        <div class="center_form">
-            <p class="title"><span>L&nbsp;O&nbsp;G&nbsp;I&nbsp;N&nbsp;&nbsp;&nbsp;&nbsp;F&nbsp;O&nbsp;R&nbsp;M</span>
-            </p>
-            <p><input type="text" class="form-control" placeholder="Name" name = "Name" ></p>
-            <p><input type="password" class="form-control" placeholder="Password" name = "Password"></p>
+
+    <div class="center_form">
+        <p class="title"><span>L&nbsp;O&nbsp;G&nbsp;I&nbsp;N&nbsp;&nbsp;&nbsp;&nbsp;F&nbsp;O&nbsp;R&nbsp;M</span></p>
+        <div class="box_two">
             {% with messages = get_flashed_messages() %}
-            <div style="color: red">{{ messages[0] }}</div>
+            <div style="color: blue">{{ messages[0] }}</div>
             {% endwith %}
+            <form action="{{ url_for('login') }}" method="POST">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Name</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Name" name="Name">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
+                           name="Password">
+                </div>
+                <div style="visibility:hidden;">sss</div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+
+            <a href="/register">Click here to register</a>
         </div>
-        <div class="right_label"></div>
-            <button type="submit" class="signIn_btn"><span>SIGN IN</span></button>
-        </form>
-        <a href="/register" >Click here to register</a>
+
     </div>
 </div>
+
 </body>
 </html>

@@ -8,10 +8,28 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
           integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <style>
+
+        .outer_box {
+        position: relative;
+
+        border: 1px solid #dddddd;
+        width: 100%;
+        height: 100vh;
+        background-image: url('https://images.pexels.com/photos/1532771/pexels-photo-1532771.jpeg?auto=compress&cs=tinysrgb&w=1600');
+
+        background-size: 100% 100%;
+        }
+
         .account{
-            width: 920px;
-            border: 1px solid #dddddd;
-            height: 800px;
+            width: 1120px;
+            //border: 1px solid #dddddd;
+            height: 600px;
+            background-color: rgba(134, 221, 221, 0.219);
+            box-shadow: 0px 0px 3px rgb(76, 219, 219);
+            position: absolute;
+            left: 50%;
+            top: 40%;
+            transform: translate(-50%, -50%);
 
 
             margin-left: auto;
@@ -23,8 +41,8 @@
             text-align: center;
         }
         .inner{
-            width: 920px;
-            border: 1px solid #dddddd;
+            width: 1120px;
+            //border: 1px solid #dddddd;
             height: 80px;
             float:left;
 
@@ -34,7 +52,7 @@
         .inner button{float:right;}
 
         .table{
-            width: 920px;
+            width: 1120px;
             border: 1px solid #dddddd;
             height: 300px;
             float:left;
@@ -44,77 +62,79 @@
 
 
 
+
     </style>
 </head>
 <body>
-<div class="account">
-    <h1>Name: {{Name}}</h1>
-    <form class="form-inline" action="{{ url_for('manage_dataset') }}" method="POST">
-        <div class="inner">
+<div class="outer_box">
+    <div class="account">
+        <h1>Name: {{Name}}</h1>
+        <form class="form-inline" action="{{ url_for('manage_dataset') }}" method="POST">
+            <div class="inner">
 
-            <div class="form-group">
-                <label for="keyword1">Keyword</label>
-                <input type="text" class="form-control" id="keyword1" placeholder="keyword" name="keyword">
+                <div class="form-group">
+                    <label for="keyword1">Keyword</label>
+                    <input type="text" class="form-control" id="keyword1" placeholder="keyword" name="keyword">
+                </div>
+                <div class="form-group">
+                    <label for="DID1">Dataset No.</label>
+                    <input type="text" class="form-control" id="DID1" placeholder="Dataset No." name="did">
+                </div>
+
+
+
+
+                <div class="form-group">
+                    <label for="datefrom1">Create date</label>
+                    <input type="text" class="form-control" id="datefrom1" placeholder="begin" name="begin_date">
+                </div>
+
+                <div class="form-group">
+                    <label for="dateto1">to</label>
+                    <input type="text" class="form-control" id="dateto1" placeholder="end" name="end_date">
+                </div>
+
             </div>
-            <div class="form-group">
-                <label for="DID1">Dataset No.</label>
-                <input type="text" class="form-control" id="DID1" placeholder="Password" name="did">
+
+            <div class="inner">
+                <button type="reset" value="Reset" name="reset" class="btn btn-default">Reset</button>
+                <button type="submit" value="Search" class="btn btn-primary">Search</button>
             </div>
+
+
+        </form>
+
+
+        <div class="table" style="opacity:0.8;">
+            <table class="table table-hover" style="font-size:15px;">
+                <tr>
+                    <th>Dataset No.</th>
+                    <th>Name</th>
+                    <th>Seller name</th>
+                    <th>Field</th>
+                    <th>Create date</th>
+                    <th>Size</th>
+                    <th>Sale number</th>
+                    <th>Details</th>
+                </tr>
+                {%for data in all_data%}
+                <tr>
+                    <td>{{data["DID"]}}</td>
+                    <td>{{data["Name"]}}</td>
+                    <td>{{data["Owner"]}}</td>
+                    <td>{{data["Field"]}}</td>
+                    <td>{{data["CreateDate"]}}</td>
+                    <td>{{data["Size"]}}</td>
+                    <td>{{data["SaleNum"]}}</td>
+                    <td><a href="/edit_dataset/{{data["DID"]}}//">Links</a></td>
+                </tr>
+                {%endfor%}
+            </table>
         </div>
 
 
-        <div class="inner">
-            <div class="form-group">
-                <label for="datefrom1">Create date</label>
-                <input type="text" class="form-control" id="datefrom1" placeholder="begin" name="begin_date">
-            </div>
-
-            <div class="form-group">
-                <label for="dateto1">to</label>
-                <input type="text" class="form-control" id="dateto1" placeholder="end" name="end_date">
-            </div>
-
-        </div>
-
-        <div class="inner">
-            <button type="reset" value="Reset" name="reset" class="btn btn-default">Reset</button>
-            <button type="submit" value="Search" class="btn btn-primary">Search</button>
-        </div>
-
-
-    </form>
-
-
-    <div class="table">
-        <table class="table table-hover">
-            <tr>
-                <th>Dataset No.</th>
-                <th>Name</th>
-                <th>Seller name</th>
-                <th>Field</th>
-                <th>Create date</th>
-                <th>Size</th>
-                <th>Sale number</th>
-                <th>Details</th>
-            </tr>
-            {%for data in all_data%}
-            <tr>
-                <td>{{data["DID"]}}</td>
-                <td>{{data["Name"]}}</td>
-                <td>{{data["Owner"]}}</td>
-                <td>{{data["Field"]}}</td>
-                <td>{{data["CreateDate"]}}</td>
-                <td>{{data["Size"]}}</td>
-                <td>{{data["SaleNum"]}}</td>
-                <td><a href="/edit_dataset/{{data["DID"]}}//">Links</a></td>
-            </tr>
-            {%endfor%}
-        </table>
+        <a href="/">Go back to homepage</a>
     </div>
-
-
-
-    <a href="/">Return</a>
 </div>
 </body>
 </html>

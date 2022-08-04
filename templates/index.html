@@ -8,12 +8,30 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
           integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <style>
+
+        .outer_box {
+        position: relative;
+
+        border: 1px solid #dddddd;
+        width: 100%;
+        height: 100vh;
+        background-image: url('https://images.pexels.com/photos/1532771/pexels-photo-1532771.jpeg?auto=compress&cs=tinysrgb&w=1600');
+
+        background-size: 100% 100%;
+        }
+
         .account{
-            width: 920px;
+            width: 1125px;
 
-            height: 800px;
+            height: 920px;
+            background-color: rgba(134, 221, 221, 0.219);
+            box-shadow: 0px 0px 3px rgb(76, 219, 219);
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
 
-
+            border: 1px solid #dddddd;
             margin-left: auto;
             margin-right: auto;
             margin-top: auto;
@@ -22,9 +40,21 @@
         .account h1{
             text-align: center;
         }
+
+        .smaller{
+            width: 280px;
+            \\border: 1px solid #dddddd;
+            height: 80px;
+            float:left;
+            font-size:25px;
+            Text-align:center;
+            padding: 10px;
+
+        }
+
         .inner{
-            width: 920px;
-            border: 1px solid #dddddd;
+            width: 1120px;
+            \\border: 1px solid #dddddd;
             height: 80px;
             float:left;
 
@@ -34,7 +64,7 @@
         .inner button{float:right;}
 
         .table{
-            width: 920px;
+            width: 1120px;
             border: 1px solid #dddddd;
             height: 300px;
             float:left;
@@ -42,81 +72,97 @@
         }
 
 
+
+
+
     </style>
 </head>
 <body>
-<div class="account">
-    <h1>All datasets&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Identity: {{Role}}</h1>
-    <form class="form-inline" action="{{ url_for('index') }}" method="POST">
-        <div class="inner">
-
-            <div class="form-group">
-                <label for="keyword1">Dataset Name</label>
-                <input type="text" class="form-control" id="keyword1" placeholder="Name" name="keyword">
+<div class="outer_box">
+    <div class="account">
+        <h1>All datasets&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Identity: {{Role}}</h1>
+        <form class="form-inline" action="{{ url_for('index') }}" method="POST">
+            <div class="smaller">
+                <a href="/edit_pwd">Edit your password</a>
             </div>
-            <div class="form-group">
-                <label for="DID1">Dataset No.</label>
-                <input type="text" class="form-control" id="DID1" placeholder="Dataset No." name="did">
+            <div class="smaller">
+                <a href="/order_management">Browse your order</a>
             </div>
-        </div>
-
-        <div class="inner">
-            <div class="form-group">
-                <label for="sellername1">Seller name</label>
-                <input type="text" class="form-control" id="sellername1" placeholder="seller name" name="seller_name">
+            <div class="smaller">
+                {%if Role != "Buyer"%}
+                <a href="/manage_dataset">Manage your dataset</a>
+                {%endif%}
             </div>
-        </div>
+            <div class="smaller">
+                {%if Role == "Seller"%}
+                <a href="/upload">Upload new dataset</a>
+                {%endif%}
+            </div>
+            <div class="inner">
 
-        <div class="inner">
-            <div class="form-group">
-                <label for="datefrom1">Create date</label>
-                <input type="text" class="form-control" id="datefrom1" placeholder="begin" name="begin_date">
+                <div class="form-group">
+                    <label for="keyword1">Dataset Name</label>
+                    <input type="text" class="form-control" id="keyword1" placeholder="Name" name="keyword">
+                </div>
+                <div class="form-group">
+                    <label for="DID1">Dataset No.</label>
+                    <input type="text" class="form-control" id="DID1" placeholder="Dataset No." name="did">
+                </div>
+                <div class="form-group">
+                    <label for="sellername1">Seller name</label>
+                    <input type="text" class="form-control" id="sellername1" placeholder="seller name"
+                           name="seller_name">
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="dateto1">to</label>
-                <input type="text" class="form-control" id="dateto1" placeholder="end" name="end_date">
+
+            <div class="inner">
+                <div class="form-group">
+                    <label for="datefrom1">Create date</label>
+                    <input type="text" class="form-control" id="datefrom1" placeholder="begin" name="begin_date">
+                </div>
+
+                <div class="form-group">
+                    <label for="dateto1">to</label>
+                    <input type="text" class="form-control" id="dateto1" placeholder="end" name="end_date">
+                </div>
+
             </div>
 
-        </div>
-
-        <div class="inner">
-            <button type="reset" value="Reset" name="reset" class="btn btn-default">Reset</button>
-            <button type="submit" value="Search" class="btn btn-primary">Search</button>
-        </div>
+            <div class="inner">
+                <button type="reset" value="Reset" name="reset" class="btn btn-default">Reset</button>
+                <button type="submit" value="Search" class="btn btn-primary">Search</button>
+            </div>
 
 
-    
-
-
-    <div class="table">
-        <table class="table table-hover">
-            <tr>
-                <th>Dataset No.</th>
-                <th>Name</th>
-                <th>Seller name</th>
-                <th>Field</th>
-                <th>Create date</th>
-                <th>Size</th>
-                <th>Sale number</th>
-                <th>Details</th>
-            </tr>
-            {%for data in all_data%}
-            <tr>
-                <td>{{data["DID"]}}</td>
-                <td>{{data["Name"]}}</td>
-                <td>{{data["Owner"]}}</td>
-                <td>{{data["Field"]}}</td>
-                <td>{{data["CreateDate"]}}</td>
-                <td>{{data["Size"]}}</td>
-                <td>{{data["SaleNum"]}}</td>
-                <td><a href="/detail/{{data["DID"]}}/">Links</a></td>
-            </tr>
-            {%endfor%}
-        </table>
-    </div>
-    {%if Role == "Buyer"%}
-        <div class="inner">
+            <div class="table" style="opacity:0.8;">
+                <table class="table table-hover" style="font-size:15px;">
+                    <tr>
+                        <th>Dataset No.</th>
+                        <th>Name</th>
+                        <th>Seller name</th>
+                        <th>Field</th>
+                        <th>Create date</th>
+                        <th>Size</th>
+                        <th>Sale number</th>
+                        <th>Details</th>
+                    </tr>
+                    {%for data in all_data%}
+                    <tr>
+                        <td>{{data["DID"]}}</td>
+                        <td>{{data["Name"]}}</td>
+                        <td>{{data["Owner"]}}</td>
+                        <td>{{data["Field"]}}</td>
+                        <td>{{data["CreateDate"]}}</td>
+                        <td>{{data["Size"]}}</td>
+                        <td>{{data["SaleNum"]}}</td>
+                        <td><a href="/detail/{{data["DID"]}}/">Links</a></td>
+                    </tr>
+                    {%endfor%}
+                </table>
+            </div>
+            {%if Role == "Buyer"%}
+            <div class="inner">
                 <div class="form-group">
                     <label>Seller name</label>
                     <input type="text" class="form-control" name="Seller name"
@@ -131,47 +177,25 @@
                     price
                 </button>
 
-                <div class="font">
+                <div class="font" style="font-size:20px;">
                     Query price:{{price}}
-                    <button type="submit" class="btn btn-default" type="submit" value="Take order" name="takeorder">Take
-                    order
-                </button>
-                </div>   
+                    <button type="submit" class="btn btn-default" type="submit" value="Take order" name="takeorder"
+                            style="background-color:#3B7AB6; color:white;">Take order
+                    </button>
+                </div>
+            </div>
+            {%endif%}
+        </form>
+
+
+        <div class="inner">{% with messages = get_flashed_messages() %}
+            <div style="color: red">{{ messages[0] }}</div>
+            {% endwith %}
+
         </div>
-    {%endif%}
-    </form>
-    <div class="inner">
-        <h4>Edit your password</h4>
-        <a href="/edit_pwd">Click here to edit your password</a>
-    </div>
+        <a href="/login">Go back to login</a>
 
-    <div class="inner">
-        <h4>Order management</h4>
-        <a href="/order_management">Click here to browse your order</a>
     </div>
-
-    {%if Role != "Buyer"%}
-
-    <div class="inner">
-        
-        <h4>Manage your dataset</h4>
-        <a href="/manage_dataset">Click here to manage your dataset</a>
-        
-    </div>
-
-    {%if Role == "Seller"%}
-    <div class="inner">
-        <h4>Upload new dataset</h4>
-        <a href="/upload">Click here to upload new dataset</a>
-    </div>
-    {%endif%}
-    {%endif%}
-
-    <div class="inner">{% with messages = get_flashed_messages() %}
-        <div style = "color: red">{{ messages[0] }}</div>
-        {% endwith %}
-    </div>
-    
 </div>
 </body>
 </html>

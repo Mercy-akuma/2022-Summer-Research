@@ -4,16 +4,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
+    <title>Order Management</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
           integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <style>
+        .outer_box {
+        position: relative;
+
+        //border: 1px solid #dddddd;
+        width: 100%;
+        height: 100vh;
+        background-image: url('https://images.pexels.com/photos/1532771/pexels-photo-1532771.jpeg?auto=compress&cs=tinysrgb&w=1600');
+
+        background-size: 100% 100%;
+        }
+
         .account{
-            width: 920px;
+            width: 1125px;
+
+            height: 920px;
+            background-color: rgba(134, 221, 221, 0.219);
+            box-shadow: 0px 0px 3px rgb(76, 219, 219);
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+
             border: 1px solid #dddddd;
-            height: 800px;
-
-
             margin-left: auto;
             margin-right: auto;
             margin-top: auto;
@@ -23,8 +40,8 @@
             text-align: center;
         }
         .inner{
-            width: 920px;
-            border: 1px solid #dddddd;
+            width: 1125px;
+            //border: 1px solid #dddddd;
             height: 80px;
             float:left;
 
@@ -34,8 +51,8 @@
         .inner button{float:right;}
 
         .table{
-            width: 920px;
-            border: 1px solid #dddddd;
+            width: 1125px;
+            //border: 1px solid #dddddd;
             height: 450px;
             float:left;
             overflow-y: scroll;
@@ -44,138 +61,140 @@
 
 
 
+
     </style>
 </head>
 <body>
-<div class="account">
-    <h1>Order management&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Identity: {{Role}}</h1>
-    <form class="form-inline" action="{{ url_for('order_management') }}" method="POST">
-        <div class="inner">
+<div class="outer_box">
+    <div class="account">
+        <h1>Order management&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Identity: {{Role}}</h1>
+        <form class="form-inline" action="{{ url_for('order_management') }}" method="POST">
+            <div class="inner">
 
-            <div class="form-group">
-                <label for="keyword1">Dataset Name</label>
-                <input type="text" class="form-control" id="keyword1" placeholder="Dataset Name" name="DName">
+                <div class="form-group">
+                    <label for="keyword1">Dataset Name</label>
+                    <input type="text" class="form-control" id="keyword1" placeholder="Dataset Name" name="DName">
+                </div>
+                <div class="form-group">
+                    <label for="DID1">Dataset No.</label>
+                    <input type="text" class="form-control" id="DID1" placeholder="Dataset No." name="OID">
+                </div>
             </div>
-            <div class="form-group">
-                <label for="DID1">Dataset No.</label>
-                <input type="text" class="form-control" id="DID1" placeholder="Dataset No." name="OID">
+
+            <div class="inner">
+                {%if Role != "Seller"%}
+                <div class="form-group">
+                    <label for="sellername1">Seller name</label>
+                    <input type="text" class="form-control" id="sellername1" placeholder="seller name" name="Seller">
+                </div>
+                {%endif%}
+                {%if Role != "Buyer"%}
+                <div class="form-group">
+                    <label for="sellername2">Buyer name</label>
+                    <input type="text" class="form-control" id="sellername2" placeholder="buyer name" name="Buyer">
+                </div>
+                {%endif%}
             </div>
+
+            <div class="inner">
+                <div class="form-group">
+                    <label for="datefrom1">Order date</label>
+                    <input type="text" class="form-control" id="datefrom1" placeholder="begin" name="begin_date">
+                </div>
+
+                <div class="form-group">
+                    <label for="dateto1">to</label>
+                    <input type="text" class="form-control" id="dateto1" placeholder="end" name="end_date">
+                </div>
+
+            </div>
+
+            <div class="inner">
+                <button type="reset" value="Reset" name="reset" class="btn btn-default">Reset</button>
+                <button type="submit" value="Search" class="btn btn-primary">Search</button>
+            </div>
+
+
+        </form>
+
+
+        <div class="table" style="opacity:0.8;">
+            <table class="table table-hover" style="font-size:15px;">
+                {%if Role == "Buyer"%}
+                <tr>
+                    <th>Order No.</th>
+                    <th>Dataset Name</th>
+                    <th>Seller</th>
+                    <th>Order date</th>
+                    <th>SQL query</th>
+                    <th>Price</th>
+                </tr>
+                {%for data in all_data%}
+                <tr>
+                    <td>{{data["OID"]}}</td>
+                    <td>{{data["DName"]}}</td>
+                    <td>{{data["Seller"]}}</td>
+                    <td>{{data["CreateDate"]}}</td>
+                    <td>{{data["SQLquery"]}}</td>
+                    <td>{{data["Price"]}}</td>
+                </tr>
+                {%endfor%}
+                {%endif%}
+
+                {%if Role == "Seller"%}
+                <tr>
+                    <th>Order No.</th>
+                    <th>Dataset Name</th>
+                    <th>Buyer</th>
+                    <th>Order date</th>
+                    <th>SQL query</th>
+                    <th>Sale data num</th>
+                    <th>Price</th>
+                </tr>
+                {%for data in all_data%}
+                <tr>
+                    <td>{{data["OID"]}}</td>
+                    <td>{{data["DName"]}}</td>
+                    <td>{{data["Buyer"]}}</td>
+                    <td>{{data["CreateDate"]}}</td>
+                    <td>{{data["SQLquery"]}}</td>
+                    <td>{{data["SaleDataNum"]}}</td>
+                    <td>{{data["Price"]}}</td>
+                </tr>
+                {%endfor%}
+                {%endif%}
+
+                {%if Role == "Admin"%}
+                <tr>
+                    <th>Order No.</th>
+                    <th>Dataset Name</th>
+                    <th>Buyer</th>
+                    <th>Seller</th>
+                    <th>Order date</th>
+                    <th>SQL query</th>
+                    <th>Price</th>
+                    <th>Details</th>
+                </tr>
+                {%for data in all_data%}
+                <tr>
+                    <td>{{data["OID"]}}</td>
+                    <td>{{data["DName"]}}</td>
+                    <td>{{data["Buyer"]}}</td>
+                    <td>{{data["Seller"]}}</td>
+                    <td>{{data["CreateDate"]}}</td>
+                    <td>{{data["SQLquery"]}}</td>
+                    <td>{{data["Price"]}}</td>
+                    <td><a href="/order_detail/{{data[" OID"]}}/">Links</a></td>
+                </tr>
+                {%endfor%}
+                {%endif%}
+            </table>
+
+
         </div>
-
         <div class="inner">
-            {%if Role != "Seller"%}
-            <div class="form-group">
-                <label for="sellername1">Seller name</label>
-                <input type="text" class="form-control" id="sellername1" placeholder="seller name" name="Seller">
-            </div>
-            {%endif%}
-            {%if Role != "Buyer"%}
-            <div class="form-group">
-                <label for="sellername1">Buyer name</label>
-                <input type="text" class="form-control" id="sellername1" placeholder="buyer name" name="Buyer">
-            </div>
-            {%endif%}
+            <a href="/">Go back to homepage</a>
         </div>
-
-        <div class="inner">
-            <div class="form-group">
-                <label for="datefrom1">Order date</label>
-                <input type="text" class="form-control" id="datefrom1" placeholder="begin" name="begin_date">
-            </div>
-
-            <div class="form-group">
-                <label for="dateto1">to</label>
-                <input type="text" class="form-control" id="dateto1" placeholder="end" name="end_date">
-            </div>
-
-        </div>
-
-        <div class="inner">
-            <button type="reset" value="Reset" name="reset" class="btn btn-default">Reset</button>
-            <button type="submit" value="Search" class="btn btn-primary">Search</button>
-        </div>
-
-
-    </form>
-
-
-    <div class="table">
-        <table class="table table-hover">
-            {%if Role == "Buyer"%}
-            <tr>
-                <th>Order No.</th>
-                <th>Dataset Name</th>
-                <th>Seller</th>
-                <th>Order date</th>
-                <th>SQL query</th>
-                <th>Price</th>
-            </tr>
-            {%for data in all_data%}
-            <tr>
-                <td>{{data["OID"]}}</td>
-                <td>{{data["DName"]}}</td>
-                <td>{{data["Seller"]}}</td>
-                <td>{{data["CreateDate"]}}</td>
-                <td>{{data["SQLquery"]}}</td>
-                <td>{{data["Price"]}}</td>
-            </tr>
-            {%endfor%}
-            {%endif%}
-
-            {%if Role == "Seller"%}
-            <tr>
-                <th>Order No.</th>
-                <th>Dataset Name</th>
-                <th>Buyer</th>
-                <th>Order date</th>
-                <th>SQL query</th>
-                <th>Sale data num</th>
-                <th>Price</th>
-            </tr>
-            {%for data in all_data%}
-            <tr>
-                <td>{{data["OID"]}}</td>
-                <td>{{data["DName"]}}</td>
-                <td>{{data["Buyer"]}}</td>
-                <td>{{data["CreateDate"]}}</td>
-                <td>{{data["SQLquery"]}}</td>
-                <td>{{data["SaleDataNum"]}}</td>
-                <td>{{data["Price"]}}</td>
-            </tr>
-            {%endfor%}
-            {%endif%}
-
-            {%if Role == "Admin"%}
-            <tr>
-                <th>Order No.</th>
-                <th>Dataset Name</th>
-                <th>Buyer</th>
-                <th>Seller</th>
-                <th>Order date</th>
-                <th>SQL query</th>
-                <th>Price</th>
-                <th>Details</th>
-            </tr>
-            {%for data in all_data%}
-            <tr>
-                <td>{{data["OID"]}}</td>
-                <td>{{data["DName"]}}</td>
-                <td>{{data["Buyer"]}}</td>
-                <td>{{data["Seller"]}}</td>
-                <td>{{data["CreateDate"]}}</td>
-                <td>{{data["SQLquery"]}}</td>
-                <td>{{data["Price"]}}</td>
-                <td><a href="/order_detail/{{data["OID"]}}/">Links</a></td>
-            </tr>
-            {%endfor%}
-            {%endif%}
-        </table>
-
-        
-        
-    </div>
-    <div class="inner">
-        <a href="/" >Return</a>
     </div>
 </div>
 </body>

@@ -8,40 +8,91 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
           integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <style>
-        .account{
-            width: 400px;
-            border: 1px solid #dddddd;
-            height: 350px;
+        .outer_box {
+        position: relative;
 
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: auto;
-            padding: 20px 40px;
+        border: 1px solid #dddddd;
+        width: 100%;
+        height: 100vh;
+        background-image: url('https://images.pexels.com/photos/33201/aurora-borealis-lofoten-norway-night.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+
+        background-size: 100% 100%;
         }
-        .account h1{
-            text-align: center;
-        }
+
+
+
+        .center_form {
+  width: 410px;
+  height: 350px;
+  background-color: rgba(134, 221, 221, 0.219);
+  box-shadow: 0px 0px 3px rgb(76, 219, 219);
+  position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+
+}
+.center_form p {
+  height: 60px;
+  width: 410px;
+  text-align: center;
+
+}
+.title {
+  height: 50px !important;
+  line-height: 50px;
+  background-color: rgba(82, 202, 182, 0.575);
+  margin-bottom: 40px;
+
+
+}
+
+.box_two{
+height:250px
+width:410px
+padding:20px 40px;
+\\border: 1px solid #dddddd;
+
+margin-left: 30px;
+margin-right: 30px;
+margin-top: auto;
+
+}
+
+
+
+
+
+
+
     </style>
 </head>
 <body>
-<div class="account">
-    <h1>Edit your password</h1>
-    {% with messages = get_flashed_messages() %}
-        <div style = "color: red">{{ messages[0] }}</div>
-    {% endwith %}
-    <form action="{{ url_for('edit_pwd') }}" method="POST">
-        <div class="form-group">
-            <label for="exampleInputEmail1">Old password</label>
-            <input type="password" class="form-control" id="exampleInputEmail1" placeholder="old password" name="Old password">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">New password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="new password" name= "New password">
+<div class="outer_box">
+
+    <div class="center_form">
+        <p class="title"><span>E&nbsp;D&nbsp;I&nbsp;T&nbsp;&nbsp;&nbsp;&nbsp;Y&nbsp;O&nbsp;U&nbsp;R&nbsp;&nbsp;&nbsp;&nbsp;P&nbsp;A&nbsp;S&nbsp;S&nbsp;W&nbsp;O&nbsp;R&nbsp;D</span></p>
+        <div class="box_two">
+            {% with messages = get_flashed_messages() %}
+            <div style="color: blue">{{ messages[0] }}</div>
+            {% endwith %}
+            <form action="{{ url_for('edit_pwd') }}" method="POST">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Old password</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="old password" name="Old password">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="new password" name= "New password">
+                </div>
+                <div style="visibility:hidden;">sss</div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+
+            <a href="/">Go back to homepage</a>
         </div>
 
-        <button type="submit" class="btn btn-default">Submit</button>
-    </form>
-    <a href="/" >Return</a>
+    </div>
 </div>
 
 </body>

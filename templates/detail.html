@@ -8,10 +8,27 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
           integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <style>
+        .outer_box {
+        position: relative;
+
+        border: 1px solid #dddddd;
+        width: 100%;
+        height: 100vh;
+        background-image: url('https://images.pexels.com/photos/1532771/pexels-photo-1532771.jpeg?auto=compress&cs=tinysrgb&w=1600');
+
+        background-size: 100% 100%;
+        }
+
         .account{
-            width: 1200px;
-            border: 1px solid #dddddd;
-            height: 800px;
+            width: 960px;
+            \\border: 1px solid #dddddd;
+            height: 700px;
+            background-color: rgba(134, 221, 221, 0.219);
+            box-shadow: 0px 0px 3px rgb(76, 219, 219);
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
 
 
             margin-left: auto;
@@ -22,16 +39,23 @@
         .account h1{
             text-align: center;
         }
-        .outer{
-            width:595px;
-            border: 1px solid #aaaaaa;
+        .outer_left{
+            width:350px;
+            \\border: 1px solid #aaaaaa;
+            height: 800px;
+            float:left;
+
+        }
+        .outer_right{
+            width:600px;
+            \\border: 1px solid #aaaaaa;
             height: 800px;
             float:left;
 
         }
         .inner{
-            width: 295px;
-            border: 1px solid #dddddd;
+            width: 170px;
+            \\border: 1px solid #dddddd;
             height: 60px;
             float:left;
 
@@ -41,7 +65,7 @@
 
         .right{
             width:590px;
-            border: 1px solid #aaaaaa;
+            \\border: 1px solid #aaaaaa;
             height: 400px;
             float:left;
         }
@@ -51,115 +75,113 @@
 
 
 
-
-
-
-
     </style>
 </head>
 <body>
-<div class="account">
-    <h1>Data details</h1>
-    <div class="outer">
-        <div class="inner">
-            Dataset name
-        </div>
-        <div class="inner">
-            <div class="B-color">{{info[0]["Name"]}}</div>
-        </div>
-
-        <div class="inner">
-            Seller name
-        </div>
-        <div class="inner">
-            <div class="B-color">{{info[0]["Owner"]}}</div>
-        </div>
-
-        <div class="inner">
-            Field
-        </div>
-        <div class="inner">
-            <div class="B-color">{{info[0]["Field"]}}</div>
-        </div>
-
-        <div class="inner">
-            Size
-        </div>
-        <div class="inner">
-            <div class="B-color">{{info[0]["Size"]}}</div>
-        </div>
-
-        <div class="inner">
-            Base price
-        </div>
-        <div class="inner">
-            <div class="B-color">{{info[0]["BasePrice"]}}</div>
-        </div>
-
-        <div class="inner">
-            Dataset No.
-        </div>
-        <div class="inner">
-            <div class="B-color">{{info[0]["DID"]}}</div>
-        </div>
-
-        <div class="inner">
-            Create date
-        </div>
-        <div class="inner">
-            <div class="B-color">{{info[0]["CreateDate"]}}</div>
-        </div>
-
-        <div class="inner">
-            Keyword
-        </div>
-        <div class="inner">
-            <div class="B-color">{%for i in keyword%}{{i}}&emsp;&emsp;{%endfor%}</div>
-        </div>
-
-        <div class="inner">
-            Sale number
-        </div>
-        <div class="inner">
-            <div class="B-color">{{info[0]["SaleNum"]}}</div>
-        </div>
-
-
-    </div>
-    <div class="outer">
-        <div class="right">
-            <div class = "table-responsive">
-                <table class="table table-striped">
-                    <tr>
-                        {%for key in data[0].keys()%}
-                        {%if key != 'empty_num'%}
-                        <th> {{key}}</th>
-                        {%endif%}
-                        {%endfor%}
-                    </tr>
-                    {%for i in range(7)%}
-                    <tr>
-                        {%for key in data[0].keys()%}
-                        {%if key != 'empty_num'%}
-                        <td>{{data[i][key]}}</td>
-                        {%endif%}
-                        {%endfor%}
-                    </tr>
-                    {%endfor%}
-                </table>
+<div class="outer_box">
+    <div class="account">
+        <h1>Data details</h1>
+        <div class="outer_left">
+            <div class="inner">
+                Dataset name
             </div>
-            
-            {% with messages = get_flashed_messages() %}
-            <div style = "color: red">{{ messages[0] }}</div>
-            {% endwith %}
+            <div class="inner">
+                <div class="B-color">{{info[0]["Name"]}}</div>
+            </div>
+
+            <div class="inner">
+                Seller name
+            </div>
+            <div class="inner">
+                <div class="B-color">{{info[0]["Owner"]}}</div>
+            </div>
+
+            <div class="inner">
+                Field
+            </div>
+            <div class="inner">
+                <div class="B-color">{{info[0]["Field"]}}</div>
+            </div>
+
+            <div class="inner">
+                Size
+            </div>
+            <div class="inner">
+                <div class="B-color">{{info[0]["Size"]}}</div>
+            </div>
+
+            <div class="inner">
+                Base price
+            </div>
+            <div class="inner">
+                <div class="B-color">{{info[0]["BasePrice"]}}</div>
+            </div>
+
+            <div class="inner">
+                Dataset No.
+            </div>
+            <div class="inner">
+                <div class="B-color">{{info[0]["DID"]}}</div>
+            </div>
+
+            <div class="inner">
+                Create date
+            </div>
+            <div class="inner">
+                <div class="B-color">{{info[0]["CreateDate"]}}</div>
+            </div>
+
+            <div class="inner">
+                Keyword
+            </div>
+            <div class="inner">
+                <div class="B-color">{%for i in keyword%}{{i}}&emsp;&emsp;{%endfor%}</div>
+            </div>
+
+            <div class="inner">
+                Sale number
+            </div>
+            <div class="inner">
+                <div class="B-color">{{info[0]["SaleNum"]}}</div>
+            </div>
             <div>
-            <a href="/" >Return</a>
+                <a href="/">Go back to homepage</a>
             </div>
-        </div>
-    
-    </div>
-    
-</div>
 
+
+        </div>
+        <div class="outer_right">
+            <div class="right">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <tr>
+                            {%for key in data[0].keys()%}
+                            {%if key != 'empty_num'%}
+                            <th> {{key}}</th>
+                            {%endif%}
+                            {%endfor%}
+                        </tr>
+                        {%for i in range(7)%}
+                        <tr>
+                            {%for key in data[0].keys()%}
+                            {%if key != 'empty_num'%}
+                            <td>{{data[i][key]}}</td>
+                            {%endif%}
+                            {%endfor%}
+                        </tr>
+                        {%endfor%}
+                    </table>
+                </div>
+
+                {% with messages = get_flashed_messages() %}
+                <div style="color: red">{{ messages[0] }}</div>
+                {% endwith %}
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
 </body>
 </html>

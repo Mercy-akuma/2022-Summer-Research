@@ -8,9 +8,19 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
           integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <style>
+        .outer_box {
+        position: relative;
+
+        //border: 1px solid #dddddd;
+        width: 100%;
+        height: 100vh;
+        background-image: url('https://images.pexels.com/photos/1532771/pexels-photo-1532771.jpeg?auto=compress&cs=tinysrgb&w=1600');
+
+        background-size: 100% 100%;
+        }
 
         .account{
-            width: 1250px;
+            width: 1210px;
             border: 1px solid #dddddd;
             height: 900px;
 
@@ -25,9 +35,10 @@
         }
         .inner{
             width: 400px;
-            border: 1px solid #dddddd;
+            //border: 1px solid #dddddd;
             height: 50px;
             float:left;
+            font-size:20px;
 
             padding: 10px;
         }
@@ -38,325 +49,327 @@
 
 
 
+
     </style>
 </head>
 <body>
-<div class="account">
-    <h1>Dataset Details</h1>
-    {%if Role == "Seller"%}
-    <form method="post" action="/edit_dataset/{{DID}}/" class="form-inline">
+<div class="outer_box">
+    <div class="account">
+        <h1>Dataset Details</h1>
+        {%if Role == "Seller"%}
+        <form method="post" action="/edit_dataset/{{DID}}/" class="form-inline">
 
 
-        <div class="inner"></div>
-        <div class="inner"></div>
-        <div class="inner"></div>
-        <div class="inner">
-            <div>Dataset name</div>
-        </div>
-        <div class="inner">
-            <div class="B-color">{{info[0]["Name"]}}</div>
-        </div>
-        <div class="inner">
-
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="New name" name="newname">
+            <div class="inner"></div>
+            <div class="inner"></div>
+            <div class="inner"></div>
+            <div class="inner">
+                <div>Dataset name</div>
             </div>
-            <button type="submit" class="btn btn-primary" value="Change" name="editname">Change</button>
-
-        </div>
-
-        <div class="inner">
-            <div>Seller name</div>
-        </div>
-        <div class="inner">
-            <div class="B-color">{{info[0]["Owner"]}}</div>
-        </div>
-        <div class="inner">
-
-        </div>
-
-        <div class="inner">
-            <div>Field</div>
-        </div>
-        <div class="inner">
-            <div class="B-color">{{info[0]["Field"]}}</div>
-        </div>
-        <div class="inner">
-
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="New Field" name="newfield">
+            <div class="inner">
+                <div class="B-color">{{info[0]["Name"]}}</div>
             </div>
-            <button type="submit" class="btn btn-primary" value="Change" name="editfield">Change</button>
+            <div class="inner">
 
-        </div>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="New name" name="newname">
+                </div>
+                <button type="submit" class="btn btn-primary" value="Change" name="editname">Change</button>
 
-        <div class="inner">
-            <div>Size</div>
-        </div>
-        <div class="inner">
-            <div class="B-color">{{info[0]["Size"]}}</div>
-        </div>
-        <div class="inner">
-
-        </div>
-
-        <div class="inner">
-            <div>Base price</div>
-        </div>
-        <div class="inner">
-            <div class="B-color">{{info[0]["BasePrice"]}}</div>
-        </div>
-        <div class="inner">
-
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="New base price" name="newbaseprice">
             </div>
-            <button type="submit" class="btn btn-primary" value="Change" name="editbaseprice">Change</button>
 
-        </div>
-
-        <div class="inner">
-            <div>Dataset No.</div>
-        </div>
-        <div class="inner">
-            <div class="B-color">{{info[0]["DID"]}}</div>
-        </div>
-        <div class="inner">
-
-        </div>
-
-        <div class="inner">
-            <div>Create date</div>
-        </div>
-        <div class="inner">
-            <div class="B-color">{{info[0]["CreateDate"]}}</div>
-        </div>
-        <div class="inner">
-
-        </div>
-
-        <div class="inner">
-            <div>Keyword</div>
-        </div>
-        <div class="inner">
-            <div class="B-color">{%for i in keyword%}{{i}}&emsp;&emsp;{%endfor%}</div>
-        </div>
-        <div class="inner">
-
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="New keywords" name="newkeywords">
+            <div class="inner">
+                <div>Seller name</div>
             </div>
-            <button type="submit" class="btn btn-primary" value="Change" name="editkeywords">Change</button>
-
-        </div>
-
-        <div class="inner">
-            <div>Sale number</div>
-        </div>
-        <div class="inner">
-            <div class="B-color">{{info[0]["SaleNum"]}}</div>
-        </div>
-        <div class="inner">
-
-        </div>
-
-        <div class="inner">
-            <div>State</div>
-        </div>
-        <div class="inner">
-            <div class="B-color">
-                {%if info[0]["State"] == 1%}
-                On sale
-                {%endif%}
-                {%if info[0]["State"] == 0%}
-                Off sale
-                {%endif%}
+            <div class="inner">
+                <div class="B-color">{{info[0]["Owner"]}}</div>
             </div>
-        </div>
-        <div class="inner">
+            <div class="inner">
 
-
-            <button type="submit" class="btn btn-primary" value="Sell/Unsell" name="editstate">Sell/Unsell</button>
-
-        </div>
-
-        <div class="inner">
-            <div>Price strategy</div>
-        </div>
-        <div class="inner">
-            <div class="B-color">{{info[0]["PriceStrategy"]}}</div>
-        </div>
-        <div class="inner">
-
-            <button type="submit" class="btn btn-primary" value="Change" name="editstrategy">UCA/QUCA</button>
-
-        </div>
-
-    </form>
-    {%endif%}
-
-
-
-
-    {%if Role == "Admin"%}
-<form method="post" action="/edit_dataset/{{DID}}/" class="form-inline">
-
-
-        <div class="inner"></div>
-        <div class="inner"></div>
-        <div class="inner"></div>
-        <div class="inner">
-            <div>Dataset name</div>
-        </div>
-        <div class="inner">
-            <div class="B-color">{{info[0]["Name"]}}</div>
-        </div>
-        <div class="inner">
-
-        </div>
-
-        <div class="inner">
-            <div>Seller name</div>
-        </div>
-        <div class="inner">
-            <div class="B-color">{{info[0]["Owner"]}}</div>
-        </div>
-        <div class="inner">
-
-        </div>
-
-        <div class="inner">
-            <div>Field</div>
-        </div>
-        <div class="inner">
-            <div class="B-color">{{info[0]["Field"]}}</div>
-        </div>
-        <div class="inner">
-
-        </div>
-
-        <div class="inner">
-            <div>Size</div>
-        </div>
-        <div class="inner">
-            <div class="B-color">{{info[0]["Size"]}}</div>
-        </div>
-        <div class="inner">
-
-        </div>
-
-        <div class="inner">
-            <div>Base price</div>
-        </div>
-        <div class="inner">
-            <div class="B-color">{{info[0]["BasePrice"]}}</div>
-        </div>
-        <div class="inner">
-
-        </div>
-
-        <div class="inner">
-            <div>Dataset No.</div>
-        </div>
-        <div class="inner">
-            <div class="B-color">{{info[0]["DID"]}}</div>
-        </div>
-        <div class="inner">
-
-        </div>
-
-        <div class="inner">
-            <div>Create date</div>
-        </div>
-        <div class="inner">
-            <div class="B-color">{{info[0]["CreateDate"]}}</div>
-        </div>
-        <div class="inner">
-
-        </div>
-
-        <div class="inner">
-            <div>Keyword</div>
-        </div>
-        <div class="inner">
-            <div class="B-color">{%for i in keyword%}{{i}}&emsp;&emsp;{%endfor%}</div>
-        </div>
-        <div class="inner">
-
-        </div>
-
-        <div class="inner">
-            <div>Sale number</div>
-        </div>
-        <div class="inner">
-            <div class="B-color">{{info[0]["SaleNum"]}}</div>
-        </div>
-        <div class="inner">
-
-        </div>
-
-        <div class="inner">
-            <div>State</div>
-        </div>
-        <div class="inner">
-            <div class="B-color">
-                {%if info[0]["State"] == 1%}
-                On sale
-                {%endif%}
-                {%if info[0]["State"] == 0%}
-                Off sale
-                {%endif%}
             </div>
-        </div>
-        <div class="inner">
 
-
-        </div>
-
-        <div class="inner">
-            <div>Price strategy</div>
-        </div>
-        <div class="inner">
-            <div class="B-color">{{info[0]["PriceStrategy"]}}</div>
-        </div>
-        <div class="inner"></div>
-
-        <div class="inner">
-            <div>Price coefiicient</div>
-        </div>
-        <div class="inner">
-            <div class="B-color">{{info[0]["Pricecoefficient"]}}</div>
-        </div>
-        <div class="inner">
-
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="New price coefficient" name="newpricecoefficient">
+            <div class="inner">
+                <div>Field</div>
             </div>
-            <button type="submit" class="btn btn-primary" value="Change" name="editpricecoefficient">Change</button>
-
-        </div>
-
-        <div class="inner">
-            <div>Sensitivity</div>
-        </div>
-        <div class="inner">
-            <div class="B-color">{{info[0]["Sensitivity"]}}</div>
-        </div>
-        <div class="inner">
-
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="New sensitivity" name="newsensitivity">
+            <div class="inner">
+                <div class="B-color">{{info[0]["Field"]}}</div>
             </div>
-            <button type="submit" class="btn btn-primary" value="Change" name="editsensitivity">Change</button>
+            <div class="inner">
 
-        </div>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="New Field" name="newfield">
+                </div>
+                <button type="submit" class="btn btn-primary" value="Change" name="editfield">Change</button>
 
-        
-    {%endif%}
-    <div class="inner">
-        <a href="/manage_dataset" >Return</a>
-        </div>
-    </form>
+            </div>
+
+            <div class="inner">
+                <div>Size</div>
+            </div>
+            <div class="inner">
+                <div class="B-color">{{info[0]["Size"]}}</div>
+            </div>
+            <div class="inner">
+
+            </div>
+
+            <div class="inner">
+                <div>Base price</div>
+            </div>
+            <div class="inner">
+                <div class="B-color">{{info[0]["BasePrice"]}}</div>
+            </div>
+            <div class="inner">
+
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="New base price" name="newbaseprice">
+                </div>
+                <button type="submit" class="btn btn-primary" value="Change" name="editbaseprice">Change</button>
+
+            </div>
+
+            <div class="inner">
+                <div>Dataset No.</div>
+            </div>
+            <div class="inner">
+                <div class="B-color">{{info[0]["DID"]}}</div>
+            </div>
+            <div class="inner">
+
+            </div>
+
+            <div class="inner">
+                <div>Create date</div>
+            </div>
+            <div class="inner">
+                <div class="B-color">{{info[0]["CreateDate"]}}</div>
+            </div>
+            <div class="inner">
+
+            </div>
+
+            <div class="inner">
+                <div>Keyword</div>
+            </div>
+            <div class="inner">
+                <div class="B-color">{%for i in keyword%}{{i}}&emsp;&emsp;{%endfor%}</div>
+            </div>
+            <div class="inner">
+
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="New keywords" name="newkeywords">
+                </div>
+                <button type="submit" class="btn btn-primary" value="Change" name="editkeywords">Change</button>
+
+            </div>
+
+            <div class="inner">
+                <div>Sale number</div>
+            </div>
+            <div class="inner">
+                <div class="B-color">{{info[0]["SaleNum"]}}</div>
+            </div>
+            <div class="inner">
+
+            </div>
+
+            <div class="inner">
+                <div>State</div>
+            </div>
+            <div class="inner">
+                <div style="color:white;">
+                    {%if info[0]["State"] == 1%}
+                    On sale
+                    {%endif%}
+                    {%if info[0]["State"] == 0%}
+                    Off sale
+                    {%endif%}
+                </div>
+            </div>
+            <div class="inner">
+
+
+                <button type="submit" class="btn btn-primary" value="Sell/Unsell" name="editstate">Sell/Unsell</button>
+
+            </div>
+
+            <div class="inner">
+                <div>Price strategy</div>
+            </div>
+            <div class="inner">
+                <div class="B-color">{{info[0]["PriceStrategy"]}}</div>
+            </div>
+            <div class="inner">
+
+                <button type="submit" class="btn btn-primary" value="Change" name="editstrategy">UCA/QUCA</button>
+
+            </div>
+
+        </form>
+        {%endif%}
+
+
+        {%if Role == "Admin"%}
+        <form method="post" action="/edit_dataset/{{DID}}/" class="form-inline">
+
+
+            <div class="inner"></div>
+            <div class="inner"></div>
+            <div class="inner"></div>
+            <div class="inner">
+                <div>Dataset name</div>
+            </div>
+            <div class="inner">
+                <div class="B-color">{{info[0]["Name"]}}</div>
+            </div>
+            <div class="inner">
+
+            </div>
+
+            <div class="inner">
+                <div>Seller name</div>
+            </div>
+            <div class="inner">
+                <div class="B-color">{{info[0]["Owner"]}}</div>
+            </div>
+            <div class="inner">
+
+            </div>
+
+            <div class="inner">
+                <div>Field</div>
+            </div>
+            <div class="inner">
+                <div class="B-color">{{info[0]["Field"]}}</div>
+            </div>
+            <div class="inner">
+
+            </div>
+
+            <div class="inner">
+                <div>Size</div>
+            </div>
+            <div class="inner">
+                <div class="B-color">{{info[0]["Size"]}}</div>
+            </div>
+            <div class="inner">
+
+            </div>
+
+            <div class="inner">
+                <div>Base price</div>
+            </div>
+            <div class="inner">
+                <div class="B-color">{{info[0]["BasePrice"]}}</div>
+            </div>
+            <div class="inner">
+
+            </div>
+
+            <div class="inner">
+                <div>Dataset No.</div>
+            </div>
+            <div class="inner">
+                <div class="B-color">{{info[0]["DID"]}}</div>
+            </div>
+            <div class="inner">
+
+            </div>
+
+            <div class="inner">
+                <div>Create date</div>
+            </div>
+            <div class="inner">
+                <div class="B-color">{{info[0]["CreateDate"]}}</div>
+            </div>
+            <div class="inner">
+
+            </div>
+
+            <div class="inner">
+                <div>Keyword</div>
+            </div>
+            <div class="inner">
+                <div class="B-color">{%for i in keyword%}{{i}}&emsp;&emsp;{%endfor%}</div>
+            </div>
+            <div class="inner">
+
+            </div>
+
+            <div class="inner">
+                <div>Sale number</div>
+            </div>
+            <div class="inner">
+                <div class="B-color">{{info[0]["SaleNum"]}}</div>
+            </div>
+            <div class="inner">
+
+            </div>
+
+            <div class="inner">
+                <div>State</div>
+            </div>
+            <div class="inner">
+                <div style="color:white;">
+                    {%if info[0]["State"] == 1%}
+                    On sale
+                    {%endif%}
+                    {%if info[0]["State"] == 0%}
+                    Off sale
+                    {%endif%}
+                </div>
+            </div>
+            <div class="inner">
+
+
+            </div>
+
+            <div class="inner">
+                <div>Price strategy</div>
+            </div>
+            <div class="inner">
+                <div class="B-color">{{info[0]["PriceStrategy"]}}</div>
+            </div>
+            <div class="inner"></div>
+
+            <div class="inner">
+                <div>Price coefiicient</div>
+            </div>
+            <div class="inner">
+                <div class="B-color">{{info[0]["Pricecoefficient"]}}</div>
+            </div>
+            <div class="inner">
+
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="New price coefficient"
+                           name="newpricecoefficient">
+                </div>
+                <button type="submit" class="btn btn-primary" value="Change" name="editpricecoefficient">Change</button>
+
+            </div>
+
+            <div class="inner">
+                <div>Sensitivity</div>
+            </div>
+            <div class="inner">
+                <div class="B-color">{{info[0]["Sensitivity"]}}</div>
+            </div>
+            <div class="inner">
+
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="New sensitivity" name="newsensitivity">
+                </div>
+                <button type="submit" class="btn btn-primary" value="Change" name="editsensitivity">Change</button>
+
+            </div>
+
+
+            {%endif%}
+            <div class="inner">
+                <a href="/manage_dataset">Go back to manage dataset</a>
+            </div>
+        </form>
+    </div>
 </div>
 </body>
 </html>
