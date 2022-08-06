@@ -81,7 +81,7 @@ def register():
     if user_info == ():
         #不重名的话加入数据库中
         dataset.register(Name,Password,Role)
-        return redirect("/")
+        return redirect("/login")
     flash("Name has already existed!")
     return redirect("/register")
     

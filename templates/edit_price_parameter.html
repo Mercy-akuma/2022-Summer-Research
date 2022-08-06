@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Price parameter</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <style>
+        .outer_box {
+        position: relative;
+
+        \\border: 1px solid #dddddd;
+        width: 100%;
+        height: 100vh;
+        background-image: url('https://images.pexels.com/photos/1532771/pexels-photo-1532771.jpeg?auto=compress&cs=tinysrgb&w=1600');
+
+        background-size: 100% 100%;
+        }
+
+        .account{
+            width: 602px;
+
+            height: 420px;
+            background-color: rgba(134, 221, 221, 0.219);
+            box-shadow: 0px 0px 3px rgb(76, 219, 219);
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+
+            border: 1px solid #dddddd;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: auto;
+
+        }
+
+        .account h1{text-align:center;}
+
+        .small{
+            width:200px;
+            height:100px;
+            //border: 1px solid black;
+            float:left;
+
+            padding:10px 10px;
+            font-size:15px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="outer_box">
+    <div class="account">
+        <h1>Edit Price Parameter</h1>
+        <form method="post" action="/edit_price_parameter/{{user_info[0]["Name"]}}/">
+        <div class="small">
+            <div>Price coefficient</div>
+        </div>
+        <div class="small">
+            <div style="color:blue;">{{user_info[0]["Pricecoefficient"]}}</div>
+        </div>
+
+        <div class="small">
+            <input type="text" class="form-control" placeholder="New price coefficient" name="newpricecoefficient">
+            <button type="submit" class="btn btn-default" value="Change" name="editcoeff">Change</button>
+        </div>
+
+        <div class="small">
+            <div>Sensitivity</div>
+        </div>
+        <div class="small">
+            <div style="color:blue;">{{user_info[0]["Sensitivity"]}}</div>
+        </div>
+
+        <div class="small">
+            <input type="text" class="form-control" placeholder="New sensitivity" name="newsensitivity">
+            <button type="submit" class="btn btn-default" value="Change" name="editsensitivity">Change</button>
+        </div>
+
+
+        </form>
+
+        <a href="/show_user" style="font-size:15px;">Go back to show all buyers</a>
+
+    </div>
+</div>
+</body>
+</html>
